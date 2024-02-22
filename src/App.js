@@ -3,7 +3,6 @@ import { useState } from 'react';
 function Square({ value, onSquareClick }) {
   return (<button className="square" onClick={onSquareClick}>{value}</button>);
 }
-
 function Board({ xIsNext, squares, onPlay }) {
 
   function handleClick(i) {
@@ -26,9 +25,9 @@ function Board({ xIsNext, squares, onPlay }) {
     } else {
       status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     }
-  
   return (
     <>
+      <p>Lewis-Tac-Toe</p>
       <div className="status">{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />

@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 body {
@@ -87,4 +89,7 @@ body {
 
 .game-info {
   margin-left: 20px;
+}
+p {
+text-align: center;
 }
