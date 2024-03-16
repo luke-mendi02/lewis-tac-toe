@@ -1,5 +1,11 @@
 import { useState } from 'react';
 
+import Profile from './profile';
+import LoginButton from './login,';
+import LogoutButton from './logout';
+
+const API_URL = 'http://localhost:3000/AddWinOrTie';
+
 function Square({ value, onSquareClick }) {
   return (<button className="square" onClick={onSquareClick}>{value}</button>);
 }
@@ -22,11 +28,15 @@ function Board({ xIsNext, squares, onPlay }) {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
+      addWinOrTie();
     } else {
       status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     }
   return (
     <>
+      <Profile></Profile>
+      <LoginButton></LoginButton>
+      <LogoutButton></LogoutButton>
       <p>Lewis-Tac-Azure</p>
       <div className="status">{status}</div>
       <div className="board-row">
@@ -75,6 +85,7 @@ export default function Game() {
       </li>
     );
   });
+
   return (
     <div className="game">
       <div className="game-board">
@@ -85,6 +96,7 @@ export default function Game() {
       </div>
     </div>
   );
+  
 }
 
 function calculateWinner(squares) {
@@ -107,3 +119,23 @@ function calculateWinner(squares) {
   return null;
 }
 
+
+function addWinOrTie() {
+  fetch(API_URL, {
+    mode: 'no-cors',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include' // Include credentials to send the Auth0 JWT token
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    console.log('Win or tie added successfully');
+  })
+  .catch(error => {
+    console.error('Error adding win or tie:', error);
+  });
+}

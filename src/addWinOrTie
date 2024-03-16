@@ -1,0 +1,24 @@
+const addWinOrTie = () => {
+    return fetch('http://localhost:3000/AddWinOrTie', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include' // Include credentials to send the Auth0 JWT token
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // Return response data if needed
+    })
+    .catch(error => {
+      console.error('Error adding win or tie:', error);
+      throw error; // Rethrow the error to handle it in the component
+    });
+  };
+  
+  export default addWinOrTie
